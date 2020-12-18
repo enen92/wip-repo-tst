@@ -29,7 +29,7 @@ jobs:
       run: echo "##[set-output name=addon;]$(git diff --diff-filter=d --name-only HEAD~ | grep / | cut -d / -f1 | sort | uniq)"
       id: extract_vars
 
-    - name: Echo vars
-      run: echo ${{ steps.extract_vars.outputs.addon }} #${{ github.event.pull_request.base.ref }}
+    - name: Addon-Check
+      run: kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
 
 
