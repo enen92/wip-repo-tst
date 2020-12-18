@@ -26,7 +26,7 @@ jobs:
 
     - name: Extract repo target branch
       shell: bash
-      run: echo "##[set-output name=addon;]$(git diff --diff-filter=d --name-only HEAD~ | grep / | cut -d / -f1 | sort | uniq))"
+      run: echo "##[set-output name=addon;]$(echo $(git diff --diff-filter=d --name-only HEAD~ | grep / | cut -d / -f1 | sort | uniq)))"
       id: extract_branch
 
     - name: Echo vars
