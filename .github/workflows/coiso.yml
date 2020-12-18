@@ -31,6 +31,6 @@ jobs:
       id: extract_vars
 
     - name: Addon-Check
-      run: kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
+      run: echo $PATH #kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
 
 
