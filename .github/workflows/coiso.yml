@@ -21,6 +21,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        echo ::add-path::$HOME/.local/bin
         python -m pip install --upgrade pip
         pip3 install --user kodi-addon-checker
 
@@ -30,6 +31,6 @@ jobs:
       id: extract_vars
 
     - name: Addon-Check
-      run: /home/runner/.local/bin/kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
+      run: kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
 
 
