@@ -32,17 +32,24 @@ jobs:
     - name: Addon-Check
       run: $HOME/.local/bin/kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }} | tee addon-checker.log
 
-    - name: Job success
-      if: ${{ success() }}
-      shell: bash
+    - name: comment PR
+      uses: unsplash/comment-on-pr@master
       env:
-        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-success-template.md addon-checker.log
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        msg: "Check out this message!"
+        check_for_duplicate_msg: false  # OPTIONAL
+    #- name: Job success
+    #  if: ${{ success() }}
+    #  shell: bash
+    #  env:
+    #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    #  run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-success-template.md addon-checker.log
 
-    - name: Job failure
-      if: ${{ failure() }}
-      shell: bash
-      env:
-        GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-failure-template.md addon-checker.log
+    #- name: Job failure
+    #  if: ${{ failure() }}
+    #  shell: bash
+    #  env:
+    #    GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    #  run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-failure-template.md addon-checker.log
 
