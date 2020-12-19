@@ -34,12 +34,14 @@ jobs:
 
     - name: Job success
       if: ${{ success() }}
+      shell: bash
       env:
         GH_TOKEN: ${{secrets.GH_TOKEN}}
       run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-success-template.md addon-checker.log
 
     - name: Job failure
       if: ${{ failure() }}
+      shell: bash
       env:
         GH_TOKEN: ${{secrets.GH_TOKEN}}
       run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-failure-template.md addon-checker.log
