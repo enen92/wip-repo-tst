@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip3 install --user kodi-addon-checker
+        pip3 install --user kodi-addon-checker gh-pr-commenter==1.0.0
 
     - name: Extract job variables
       shell: bash
@@ -32,7 +32,21 @@ jobs:
     - name: Addon-Check
       run: $HOME/.local/bin/kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }} | tee addon-checker.log
 
-    - name: cat log
-      run: cat addon-checker.log
+    - name: Dump github context
+      run:   echo "$GITHUB_CONTEXT"
+      shell: bash
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
 
+    - name: Job success
+      if: ${{ success() }}
+      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository.name }} ${{ github.event.number }}
+      env:
+        GH_TOKEN: ${{secrets.GH_TOKEN}}
+
+    - name: Job failure
+      if: ${{ failure() }}
+      run: cat addon-checker.log
+      env:
+        GH_TOKEN: ${{secrets.GH_TOKEN}}
 

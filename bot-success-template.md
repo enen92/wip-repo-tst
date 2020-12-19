@@ -1,21 +1,15 @@
-## Travis tests were successful
+## Kodi-Addon-Checker was successful
 Hey @{{pullRequestAuthor}},
 we found no major flaws with your code. Still you might want to look at this logfile, as we usually suggest some optional improvements.
 
-{{#jobs}}
-### {{displayName}}
-{{#scripts}}
+
 <details>
   <summary>
     <strong>
-     {{command}}
+     Expand log file
     </strong>
   </summary>
 
 ```
-{{&contents}}
+{{contents}}
 ```
-</details>
-<br />
-{{/scripts}}
-{{/jobs}}
