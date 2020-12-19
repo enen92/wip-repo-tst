@@ -1,4 +1,4 @@
-name: Kodi Addon-Check2
+name: Kodi Addon-Check
 
 on:
   pull_request:
@@ -34,13 +34,13 @@ jobs:
 
     - name: Job success
       if: ${{ success() }}
-      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-success-template.md addon-checker.log
       env:
         GH_TOKEN: ${{secrets.GH_TOKEN}}
+      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-success-template.md addon-checker.log
 
     - name: Job failure
       if: ${{ failure() }}
-      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-failure-template.md addon-checker.log
       env:
         GH_TOKEN: ${{secrets.GH_TOKEN}}
+      run: $HOME/.local/bin/gh-pr-commenter.py ${{ github.repository }} ${{ github.event.number }} bot-failure-template.md addon-checker.log
 
