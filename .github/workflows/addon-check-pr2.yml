@@ -3,7 +3,7 @@ name: Kodi Addon-Check2
 on:
   pull_request:
     branches:
-      - '**'
+      - matrix
 
 jobs:
   kodi-addon-checker:
