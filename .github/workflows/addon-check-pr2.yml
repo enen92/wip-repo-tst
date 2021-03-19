@@ -1,6 +1,6 @@
 name: Kodi Addon-Check2
 
-on: pull_request
+on: push
 
 jobs:
   kodi-addon-checker:
