@@ -27,4 +27,10 @@ jobs:
       id: extract_vars
 
     - name: Addon-Check
-      run: $HOME/.local/bin/kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }}
+      run: $HOME/.local/bin/kodi-addon-checker --branch=${{ github.event.pull_request.base.ref }} --PR ${{ steps.extract_vars.outputs.addon }} | tee addon-checker.log
+
+    - name: Archieve addon-checker log
+      uses: actions/upload-artifact@v2
+      with:
+        name: addon-checker-log
+        path: addon-checker.log
